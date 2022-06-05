@@ -1,6 +1,6 @@
-type ExampleEntity @entity {
+type UserVest @entity {
   id: ID!
-  count: BigInt!
-  user: Bytes! # address
-  totalLockedAmount: BigInt! # uint256
+  vestingAmount: BigInt! #uint256
+  vestedAmount: BigInt! #uint256
+  totalVestedAmount: BigInt! # uint256
 }
