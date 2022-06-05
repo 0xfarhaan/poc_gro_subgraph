@@ -1,0 +1,62 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: undefined
+    network: mainnet
+    source:
+      address: "0x748218256AfE0A19a88EBEB2E0C5Ce86d2178360"
+      abi: GROVesting
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - LogExit
+        - LogExtend
+        - LogInstantExit
+        - LogMaxLockPeriod
+        - LogMigrate
+        - LogNewBonusContract
+        - LogNewDistributer
+        - LogNewInitUnlockedPercent
+        - LogNewInstantUnlockedPercent
+        - LogNewMigrator
+        - LogSetStatus
+        - LogVest
+        - LogVester
+        - OwnershipTransferred
+      abis:
+        - name: GROVesting
+          file: ./abis/GROVesting.json
+      eventHandlers:
+        - event: LogExit(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleLogExit
+        - event: LogExtend(indexed address,uint256,(uint256,uint256))
+          handler: handleLogExtend
+        - event: LogInstantExit(indexed address,uint256,uint256)
+          handler: handleLogInstantExit
+        - event: LogMaxLockPeriod(uint256)
+          handler: handleLogMaxLockPeriod
+        - event: LogMigrate(indexed address,(uint256,uint256))
+          handler: handleLogMigrate
+        - event: LogNewBonusContract(address)
+          handler: handleLogNewBonusContract
+        - event: LogNewDistributer(address)
+          handler: handleLogNewDistributer
+        - event: LogNewInitUnlockedPercent(uint256)
+          handler: handleLogNewInitUnlockedPercent
+        - event: LogNewInstantUnlockedPercent(uint256)
+          handler: handleLogNewInstantUnlockedPercent
+        - event: LogNewMigrator(address)
+          handler: handleLogNewMigrator
+        - event: LogSetStatus(bool)
+          handler: handleLogSetStatus
+        - event: LogVest(indexed address,uint256,uint256,(uint256,uint256))
+          handler: handleLogVest
+        - event: LogVester(address,bool)
+          handler: handleLogVester
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/gro-vesting.ts
